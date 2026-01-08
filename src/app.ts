@@ -6,6 +6,14 @@ app.set('view engine', 'pug');
 app.use(express.static('public'));
 app.use(express.urlencoded());
 
+app.get('/', (req, res) => {
+    res.render("index.pug")
+});
+
+// Routes produits
+import { productRouter } from "./routes/productRoutes";
+app.use('/produits', productRouter);
+
 // Lance le serveur express sur le port 3000
 const port = 3000;
 app.listen(port, () => {

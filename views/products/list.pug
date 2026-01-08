@@ -1,0 +1,64 @@
+- const title = "Liste des produits du magasin - DGA TT Bourges"
+
+include ../includes/head.pug
+
+main
+    if redirect != null && redirect != ""
+        div.fr-container
+            div.fr-alert
+                p.fr-alert__title=redirect
+
+    div.fr-container
+        form(action="/produits", method="get", id="storybook-form")
+            fieldset.fr-fieldset(id="storybook-form-fieldset" aria-labelledby="storybook-form-fieldset-legend storybook-form-fieldset-messages")
+                legend.fr-fieldset__legend(id="storybook-form-fieldset-legend") Rechercher un produit
+                div.fr-fieldset__element.fr-fieldset__element--inline
+                    div.fr-input-group
+                        label(for="nom").fr-label Nom
+                        input(type="search", name="nom", placeholder="Charles Leclrec", value=name).fr-input
+                    div.fr-input-group
+                        label(for="ref").fr-label Référence
+                        input(type="search", name="ref", placeholder="11refMano45", value=ref).fr-input
+                    div.fr-select-group
+                        label(for="ordre").fr-label Trier 
+                        select(name="ordre").fr-select
+                            option(value=null) par référence
+                            option(value="asc" selected=sort=="asc") stock croissant
+                            option(value="desc" selected=sort=="desc") stock décroissant
+            button.fr-btn rechercher
+
+        form(action="/produits", method="get")
+            input(type="hidden", name="nom", value="")
+            input(type="hidden", name="ref", value="")
+            input(type="hidden", name="ordre", value=null)
+            button.fr-btn.fr-btn--secondary réinitialiser les filtres
+
+        a(href="/produits/nouveau").fr-btn créer un nouveau produit
+
+    div.fr-container
+        h4 #{result.count} résultats
+
+        table
+            thead
+                td(scope="col") ref
+                td(scope="col") nom
+                td(scope="col") fabricant
+                td(scope="col") quantité
+            tbody
+                each product in result.products
+                    tr
+                        th(scope="row")
+                            a(href="/produits/" + product.ref)= product.ref
+                        td= product.name
+                        td= product.manufacturer
+                        td= product.quantity
+
+    div.fr-container
+        - var n = 0
+        nav(role="navigation" aria-label="Pagination" data-fr-analytics-page-total="132").fr-pagination
+            ul.fr-pagination__list
+                while n < result.count/12
+                    li.fr-pagination__link
+                        -link = "/produits" + "?page=" + n + "&nom=" + name + "&ref=" + ref + "&ordre=" + sort
+                        a(href=link)= n
+                    -n++

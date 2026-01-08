@@ -1,0 +1,19 @@
+//- Formulaire d'édition d'un produit
+
+- const title = product.name 
+
+include ../includes/head.pug
+
+h1 Modifier #{product.name}
+
+form(action="/produits/edit/"+product.ref, method="post") 
+    label(for="newRef") référence*
+    input(type="text", name="newRef", placeholder=product.ref value=product.ref)
+    label(for="name") nom du produit*
+    input(type="text", name="name", placeholder=product.name value=product.name)
+    label(for="manufacturer") fabricant*
+    input(type="text", name="manufacturer", placeholder=product.manufacturer value=product.manufacturer)
+    label(for="quantity") quantité*
+    input(type="number", name="quantity", min=0, max=100 value=product.quantity)
+    button valider
+

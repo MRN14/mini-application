@@ -1,0 +1,16 @@
+- const title = "nouveau produit"
+
+include ../includes/head.pug
+
+h1 Nouveau produit
+
+form(action="/produits/nouveau", method="post") 
+    label(for="ref") référence*
+    input(type="text", name="ref", placeholder="a1hu2ninij3", required)
+    label(for="name") nom du produit*
+    input(type="text", name="name", placeholder="charles leclerc", required)
+    label(for="manufacturer") fabricant*
+    input(type="text", name="manufacturer", placeholder="nexter", required)
+    label(for="quantity") quantité*
+    input(type="number", name="quantity", min=0, max=100, required)
+    button valider

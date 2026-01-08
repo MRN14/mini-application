@@ -1,0 +1,21 @@
+//- Affiche la page d'infos sur un produit
+
+- const title = product.name 
+
+include ../includes/head.pug
+
+main.fr-container
+    p ref : #{product.ref}
+    h1= product.name
+    p fabricant : #{product.manufacturer}
+    p quantité : #{product.quantity}
+
+    div.fr-btns-group
+        a(href="/produits/edit/"+product.ref).fr-btn.fr-btn--secondary modifier
+
+        form(action="/produits/delete", method="post")
+            input(type="hidden", name="ref", value=product.ref)
+            input(type="hidden", name="name", value=product.name)
+            button.fr-btn supprimer
+
+    a(href="/produits") Retour à la liste
