@@ -38,8 +38,9 @@ Le projet doit être remis 1 semaine avant le rendez-vous physique par mail avec
 Premier lancement :
 
 1. Compléter le fichier `.env`
-2. exécutez `npm run demo`
-3. Ouvez `http://localhost:3000` dans votre navigateur
+2. Installez les dépendances avec `npm i`
+3. exécutez `npm run demo`
+4. Ouvez `http://localhost:3000` dans votre navigateur
 
 Pour relancer le projet déjà initialisé par `npm run demo` exécuter `npm run dev`
 
